@@ -1,0 +1,54 @@
+@import "../../styles.sass"
+
+.login-header
+  display: flex
+  justify-content: center
+  flex-wrap: wrap
+  background: $primary
+  box-shadow: inset 0px -3px 6px rgba(0, 0, 0, 0.16)
+  h1
+    font-family: 'roboto'
+    font-weight: lighter
+  img
+    width: 70%
+    margin: 30px
+.login-form
+  width: 80%
+  margin: auto
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  div
+    width: 100%
+    padding: 15px
+    border-radius: 6px
+    border: 1px solid $black
+    margin-top: 30px
+    i
+      padding-right: 7px
+    input
+      background: transparent
+      border: none
+      color: $black
+      &:focus
+        outline: none
+      &::placeholder
+        color: $black
+        font-family: $helvetica
+        font-weight: lighter
+  button
+    background: transparent
+    font-family: $helvetica
+    border: 1px solid $black
+    color: $black
+    width: 60%
+    padding: 10px
+    margin-top: 30px
+    border-radius: 10px
+.register-link
+  color: $black
+  text-decoration: none
+  font-family: $source-sans
+  font-size: 7px
+  width: 100%
+  text-align: center

@@ -1,0 +1,29 @@
+<div *ngIf="user">
+  <div class="info-wrapper">
+    <i class="fa fa-chevron-left" (click)="goBack()"></i>
+    <div class="profile-info-wrapper">
+      <div class="img-wrapper">
+
+        <img src="{{user.meta.avatar}}">
+        <div class="upload-btn-wrapper">
+            <button class="btn"><i class="fa fa-pen"></i></button>
+            <input type="file" (change)="setProfilepicture($event)" />
+        </div>
+      </div>
+      <h4>{{user.name}}</h4>
+      <h6>Diepe Slaper</h6>
+    </div>
+  </div>
+  <div class="menu-container">
+    <div class="slider-wrapper">
+      <span>slaapdoel</span>
+      <div class="slider"></div>
+    </div>
+    <ul class="user-menu">
+      <li><a routerLink="/profile/stats/{{user.id}}"><i class="fa fa-chart-bar"></i>stats</a></li>
+      <li><a routerLink=""><i class="fa fa-question"></i>Take the quiz</a></li>
+      <li><a routerLink=""><i class=""></i></a></li>
+      <li class="logout-btn"><a routerLink="/logout"><i class="fa fa-sign-out-alt"></i>Logout</a></li>
+    </ul>
+  </div>
+</div>

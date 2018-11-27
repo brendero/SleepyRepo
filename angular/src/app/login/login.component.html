@@ -1,0 +1,21 @@
+  <div class="login-header">
+    <h1>Sleepy</h1>
+    <img src="../../assets/img/Logo.svg">
+  </div>
+  <div class="login-form-wrapper">
+    <form (ngSubmit)="onLogin()" class="login-form">
+      <div>
+        <i class="far fa-user"></i>
+        <input type="text" title="username" id="username" name="username" placeholder="Username" [(ngModel)]="username">
+      </div>
+      <div>
+        <i class="fa fa-lock"></i>
+        <input type="password" title="password" id="password" name="password" placeholder="Password" [(ngModel)]="password">
+      </div>
+
+      <button type="submit">
+        login
+      </button>
+      <a routerLink="/register" class="register-link">Don't have an account? register</a>
+    </form>
+  </div>

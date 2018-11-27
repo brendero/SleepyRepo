@@ -1,0 +1,30 @@
+<div class="sidebar" *ngIf="router.url != '/login' && router.url !='/register' && router.url !='/profile'">
+  <div class="sidebar-profile" *ngIf="user">
+    <div class="profile-wrap">
+      <div class="profile-pic-wrap">
+        <img src="{{user.meta.avatar}}">
+      </div>
+      <div class="profile-name-wrapper">
+        <a routerLink="/profile">
+          <h4>{{user.name}}</h4>
+          <h6>Diepe Slaper</h6>
+        </a>
+      </div>
+    </div>
+  </div>
+  <ul class="sidebar-menu">
+    <li [class.active-menu]="router.url=='/home'"><a routerLink="/home"><i class="fa fa-bed"></i>Sleep Tracking</a></li>
+    <li [class.active-menu]="router.url=='/friends'"><a routerLink="/friends"><i class="fa fa-user-friends"></i>Friends</a></li>
+    <li [class.active-menu]="router.url=='/tools'"><a routerLink="/tools"><i class="fa fa-toolbox"></i>Tools & tips</a></li>
+    <li [class.active-menu]="router.url=='/wokeuplikethis'"><a routerLink="/wokeuplikethis"><i class="fa fa-hashtag"></i>WokeUpLikeThis</a></li>
+  </ul>
+</div>
+
+<div *ngIf="router.url != '/login' && router.url !='/register' && router.url !='/profile'" class="nav-wrapper" [class.friends-menu]="router.url=='/friends'">
+  <a id="hamburger-icon" title="Menu" (click)="ToggleSidebar()">
+    <span class="line line-1"></span>
+    <span class="line line-2"></span>
+    <span class="line line-3"></span>
+  </a>
+  </div>
+<router-outlet></router-outlet>

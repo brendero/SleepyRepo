@@ -1,0 +1,24 @@
+@import '../../styles.sass'
+
+.search-form
+  width: 80%
+  margin: auto
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  div
+    width: 100%
+    border-radius: 6px
+    border: 1px solid $black
+    i
+      padding-right: 7px
+    input
+      background: transparent
+      border: none
+      color: $black
+      &:focus
+        outline: none
+      &::placeholder
+        color: $black
+        font-family: $helvetica
+        font-weight: lighter

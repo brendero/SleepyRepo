@@ -1,0 +1,32 @@
+<div class="register-header">
+  <h1>Sleepy</h1>
+</div>
+<div class="register-form-wrapper">
+  <form (ngSubmit)="registerUser()" class="register-form">
+    <div>
+      <i class="far fa-user"></i>
+      <input type="text" title="username" id="username" name="username" placeholder="Username" [(ngModel)]="username">
+    </div>
+    <div>
+      <i class="far fa-user"></i>
+      <input type="text" title="firstName" id="firstName" name="firstName" placeholder="First Name" [(ngModel)]="firstName">
+    </div>
+    <div>
+      <i class="far fa-user"></i>
+      <input type="text" title="lastName" id="lastName" name="lastName" placeholder="Last Name" [(ngModel)]="lastName">
+    </div>
+    <div>
+      <i class="far fa-envelope"></i>
+      <input type="email" title="email" id="email" name="email" placeholder="Email" [(ngModel)]="email">
+    </div>
+    <div>
+      <i class="fa fa-lock"></i>
+      <input type="password" title="password" id="password" name="password" placeholder="Password" [(ngModel)]="password">
+    </div>
+
+    <button type="submit">
+      register
+    </button>
+    <a routerLink="/login" class="register-link">go back to login</a>
+  </form>
+</div>
