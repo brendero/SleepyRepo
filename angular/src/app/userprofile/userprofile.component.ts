@@ -34,13 +34,15 @@ export class UserprofileComponent implements OnInit {
   readThis(inputValue: any): void {
     const file: File = inputValue.files[0];
 
-    this.fileReaderService.readFile(file)
-        .subscribe(data => {
-          this.user.meta.avatar = data;
+    if (file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/gif') {
+      this.fileReaderService.readFile(file)
+          .subscribe(data => {
+              this.user.meta.avatar = data;
 
-          this.authService.updateUserPicture(this.user.id, this.user.meta.avatar)
-              .subscribe();
-        });
+              this.authService.updateUserPicture(this.user.id, this.user.meta.avatar)
+                  .subscribe();
+            });
+      }
   }
 
 

@@ -1,3 +1,4 @@
+import { MessageService } from './../messageService/message.service';
 import { AuthService } from './../authservice/auth.service';
 import { PhotofeedService } from './../photofeedservice/photofeed.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,34 +14,47 @@ export class PhotofeedComponent implements OnInit {
   activeUserID: number;
   constructor(
     private photofeedService: PhotofeedService,
-    private authService: AuthService
+    private authService: AuthService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit() {
     this.getCurrentUser();
     this.getPosts();
   }
-
-  checkLike(likeList: []): void {
-    console.log(likeList);
-
-    this.photofeedService.checkLike(this.activeUserID, likeList)
-            .subscribe(statement => {
-              console.log(statement);
-            })
+  checkLike(likeList, postId): void {
+    if (likeList !== false) {
+      const index = likeList.indexOf(this.activeUserID);
+      if (index > -1) {
+        likeList.splice(index, 1);
+        this.photofeedService.updateLikes(postId, likeList)
+            .subscribe(postData => {
+              console.log(postData);
+            });
+        console.log('whaddup');
+      } else {
+        likeList.push(this.activeUserID);
+        this.photofeedService.updateLikes(postId, likeList)
+            .subscribe(
+              postData => {
+                console.log(postData);
+              });
+      }
+    } else {
+      likeList = [];
+      likeList.push(this.activeUserID);
+      console.log(likeList);
+    }
   }
-
   getCurrentUser(): void {
     this.authService.getActiveUser()
         .subscribe(userData => {
           this.activeUserID = userData.id;
-        }
-        );
+        });
   }
   getPosts(): void {
     this.photofeedService.getPosts()
         .subscribe(postData => {
-          console.log(postData);
           this.posts = postData;
         });
   }

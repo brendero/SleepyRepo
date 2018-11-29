@@ -7,7 +7,7 @@
         <img src="{{user.meta.avatar}}">
         <div class="upload-btn-wrapper">
             <button class="btn"><i class="fa fa-pen"></i></button>
-            <input type="file" (change)="setProfilepicture($event)" />
+            <input type="file" accept="image/*" (change)="setProfilepicture($event)" />
         </div>
       </div>
       <h4>{{user.name}}</h4>

@@ -25,6 +25,9 @@ export const environment = {
       },
       media: {
         url: 'media'
+      },
+      acf: {
+        url: 'acf/v3/'
       }
     }
   }
