@@ -138,4 +138,7 @@ add_action( 'rest_api_init', function () {
 
 add_action('init', 'backend_register_wokeuplikethis');
 add_action('init', 'backend_register_tools');
+// Enable the option edit in rest
+add_filter( 'acf/rest_api/field_settings/edit_in_rest', '__return_true' );
+
 ?>

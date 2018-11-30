@@ -14,7 +14,7 @@
       </div>
       <div class="meta-box">
         <!-- TODO: Add like functionality -->
-        <i class="far fa-heart" (click)="checkLike(post.acf.likes, post.id)"></i> <span *ngIf="post.acf.likes" >{{post.acf.likes.length}}</span> Likes
+        <i id="heart{{post.id}}" class="far fa-heart" (click)="updateLike(post.acf.likes, post.id)"></i> <span *ngIf="post.acf.likes" >{{post.acf.likes.length}}</span> Likes
         <i class="far fa-comment-alt"></i> <span *ngIf="post._embedded['replies']">{{post._embedded['replies'][0].length}}</span> comments
       </div>
     </div>

@@ -1,7 +1,8 @@
+import { element } from 'protractor';
 import { MessageService } from './../messageService/message.service';
 import { AuthService } from './../authservice/auth.service';
 import { PhotofeedService } from './../photofeedservice/photofeed.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { Post } from '../Post';
 
 @Component({
@@ -22,14 +23,19 @@ export class PhotofeedComponent implements OnInit {
     this.getCurrentUser();
     this.getPosts();
   }
-  checkLike(likeList, postId): void {
+  updateLike(likeList, postId): void {
+    // TODO: If already liked set heart to red
+    const heart = document.querySelector(`#heart${postId}`);
     if (likeList !== false) {
       const index = likeList.indexOf(this.activeUserID);
       if (index > -1) {
         likeList.splice(index, 1);
         this.photofeedService.updateLikes(postId, likeList)
-            .subscribe(postData => {
+          .subscribe(postData => {
               console.log(postData);
+                heart.classList.add('far');
+                heart.classList.remove('fa');
+                heart.classList.remove('heartColor');
             });
         console.log('whaddup');
       } else {
@@ -38,11 +44,21 @@ export class PhotofeedComponent implements OnInit {
             .subscribe(
               postData => {
                 console.log(postData);
+                heart.classList.remove('far');
+                heart.classList.add('fa');
+                heart.classList.add('heartColor');
               });
       }
     } else {
       likeList = [];
       likeList.push(this.activeUserID);
+      this.photofeedService.updateLikes(postId, likeList)
+      .subscribe(postData => {
+        console.log(postData);
+        heart.classList.remove('far');
+        heart.classList.add('fa');
+        heart.classList.add('heartColor');
+      });
       console.log(likeList);
     }
   }
@@ -56,6 +72,15 @@ export class PhotofeedComponent implements OnInit {
     this.photofeedService.getPosts()
         .subscribe(postData => {
           this.posts = postData;
+          this.checkLikes();
         });
+  }
+  checkLikes(): void {
+    // TODO: make this work
+    this.posts.forEach(el => {
+      if (el.acf.likes.indexOf(this.activeUserID) > -1) {
+        console.log(el.id);
+      }
+    });
   }
 }
