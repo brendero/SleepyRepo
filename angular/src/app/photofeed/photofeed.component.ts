@@ -23,8 +23,8 @@ export class PhotofeedComponent implements OnInit {
     this.getCurrentUser();
     this.getPosts();
   }
+
   updateLike(likeList, postId): void {
-    // TODO: If already liked set heart to red
     const heart = document.querySelector(`#heart${postId}`);
     if (likeList !== false) {
       const index = likeList.indexOf(this.activeUserID);
@@ -77,10 +77,17 @@ export class PhotofeedComponent implements OnInit {
   }
   checkLikes(): void {
     // TODO: make this work
-    this.posts.forEach(el => {
-      if (el.acf.likes.indexOf(this.activeUserID) > -1) {
-        console.log(el.id);
-      }
+    const postArray = this.posts;
+    const ID = this.activeUserID;
+    setTimeout(function() {
+      postArray.forEach(el => {
+        const heart = document.querySelector(`#heart${el.id}`);
+        if (el.acf.likes.indexOf(ID) > -1) {
+          heart.classList.remove('far');
+          heart.classList.add('fa');
+          heart.classList.add('heartColor');
+        }
+    }, 1000);
     });
   }
 }
