@@ -3,7 +3,6 @@
     <i class="fa fa-chevron-left" (click)="goBack()"></i>
     <div class="profile-info-wrapper">
       <div class="img-wrapper">
-
         <img src="{{user.meta.avatar}}">
         <div class="upload-btn-wrapper">
             <button class="btn"><i class="fa fa-pen"></i></button>
@@ -11,18 +10,22 @@
         </div>
       </div>
       <h4>{{user.name}}</h4>
+      <!-- TODO: make type of sleeper dynamic -->
       <h6>Diepe Slaper</h6>
     </div>
   </div>
   <div class="menu-container">
     <div class="slider-wrapper">
       <span>slaapdoel</span>
-      <div class="slider"></div>
+      <div class="slider">
+        <input type="range" min="0" max="24" (change)="sliderMove($event)" [(ngModel)]="sliderValue">
+        <span>{{sliderValue}} uur</span>
+      </div>
     </div>
     <ul class="user-menu">
       <li><a routerLink="/profile/stats/{{user.id}}"><i class="fa fa-chart-bar"></i>stats</a></li>
-      <li><a routerLink=""><i class="fa fa-question"></i>Take the quiz</a></li>
-      <li><a routerLink=""><i class=""></i></a></li>
+      <li><a routerLink="/profile/quiz/{{user.id}}"><i class="fa fa-question"></i>Take the quiz</a></li>
+      <li><a routerLink=""><i class="fa fa-question"></i></a></li>
       <li class="logout-btn"><a routerLink="/logout"><i class="fa fa-sign-out-alt"></i>Logout</a></li>
     </ul>
   </div>

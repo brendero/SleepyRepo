@@ -29,7 +29,9 @@
             "styles": [
               "src/styles.sass"
             ],
-            "scripts": []
+            "scripts": [
+
+            ]
           },
           "configurations": {
             "production": {
@@ -83,10 +85,12 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.sass"
+              "src/styles.sass",
+              "src/assets/leaflet/leaflet.css"
             ],
             "scripts": [
-              "src/assets/js/main.js"
+              "src/assets/js/main.js",
+              "src/assets/leaflet/leaflet.js"
             ],
             "assets": [
               "src/favicon.ico",

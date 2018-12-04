@@ -26,5 +26,11 @@
     <span class="line line-2"></span>
     <span class="line line-3"></span>
   </a>
-  </div>
+  <form *ngIf="router.url == '/friends'" class="form-wrapper">
+    <div class="form-group">
+			<i class="fa fa-search icon" (click)="toggleSearchBar()"></i>
+        <input type="text" placeholder="Search friends">
+    </div>
+</form>
+</div>
 <router-outlet></router-outlet>

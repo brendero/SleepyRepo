@@ -13,6 +13,7 @@ import { Post } from '../Post';
 export class PhotofeedComponent implements OnInit {
   posts: Post[];
   activeUserID: number;
+  userFriends: any;
   constructor(
     private photofeedService: PhotofeedService,
     private authService: AuthService,
@@ -21,7 +22,6 @@ export class PhotofeedComponent implements OnInit {
 
   ngOnInit() {
     this.getCurrentUser();
-    this.getPosts();
   }
 
   updateLike(likeList, postId): void {
@@ -66,17 +66,26 @@ export class PhotofeedComponent implements OnInit {
     this.authService.getActiveUser()
         .subscribe(userData => {
           this.activeUserID = userData.id;
+          this.userFriends = userData.acf.friends;
+          this.getPosts();
         });
   }
   getPosts(): void {
+    let postArray = [];
     this.photofeedService.getPosts()
         .subscribe(postData => {
-          this.posts = postData;
+          postData.forEach(post => {
+            this.userFriends.forEach(friend => {
+              if (post.author === friend) {
+                postArray.push(post);
+              }
+            });
+          });
+          this.posts = postArray;
           this.checkLikes();
         });
   }
   checkLikes(): void {
-    // TODO: make this work
     const postArray = this.posts;
     const ID = this.activeUserID;
     setTimeout(function() {

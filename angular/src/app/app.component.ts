@@ -34,6 +34,18 @@ export class AppComponent implements OnInit{
       Hamburger.classList.add('active');
     }
   }
+  toggleSearchBar() {
+    const formGroup = document.querySelector('.form-group');
+    const form = document.querySelector('.form-wrapper');
+
+    if (formGroup.classList.contains('openInput')) {
+      formGroup.classList.remove('openInput');
+      form.setAttribute('style', 'z-index: 1;');
+    } else {
+      formGroup.classList.add('openInput');
+      form.setAttribute('style', 'z-index: 999;');
+    }
+  }
   getActiveUser(): void {
     this.authService.getActiveUser()
         .subscribe(userData => {

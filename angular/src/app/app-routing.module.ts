@@ -1,3 +1,4 @@
+import { QuizComponent } from './quiz/quiz.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FriendsDetailComponent } from './friends-detail/friends-detail.component';
 import { UserstatsComponent } from './userstats/userstats.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: UserprofileComponent},
   {path: 'profile/stats/:id', component: UserstatsComponent},
+  {path: 'profile/quiz/:id', component: QuizComponent},
   {path: 'home', component: HomescreenComponent},
   {path: 'friends', component: FriendsComponent},
   {path: 'friends/:id', component: FriendsDetailComponent},

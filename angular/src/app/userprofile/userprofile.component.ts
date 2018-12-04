@@ -14,6 +14,7 @@ export class UserprofileComponent implements OnInit {
   user: User;
   image64: string;
   meta: Meta;
+  sliderValue: number;
 
   constructor(
     private authService: AuthService,
@@ -31,6 +32,7 @@ export class UserprofileComponent implements OnInit {
   setProfilepicture($event): void {
     this.readThis($event.target);
   }
+
   readThis(inputValue: any): void {
     const file: File = inputValue.files[0];
 
@@ -45,11 +47,20 @@ export class UserprofileComponent implements OnInit {
       }
   }
 
-
   getActiveUser(): void {
     this.authService.getActiveUser()
         .subscribe(userData => {
+          console.log(userData);
           this.user = userData;
+          this.sliderValue = userData.meta.slaapdoel;
         });
+  }
+
+  sliderMove(): void {
+    console.log(this.sliderValue);
+    this.authService.updateSlaapdoel(this.user.id,this.sliderValue)
+        .subscribe(
+
+        );
   }
 }

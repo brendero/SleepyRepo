@@ -1,4 +1,4 @@
-import { environment } from './../../environments/environment';
+import { environment } from 'src/environments/environment';
 import { AuthToken } from './../authToken';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -103,6 +103,43 @@ export class AuthService {
             catchError(this.handleError<User>('updateUserPicture'))
           );
   }
+  updateSlaapdoel(id: number, slaapdoel: number): Observable<User> {
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      })
+    };
+    const httpBody = {
+      'meta': {
+        'slaapdoel': slaapdoel
+      }
+    };
+
+    return this.http.post<User>(`${this.tokenUrl}${environment.api.jsonendpoint}${environment.api.endPoints.Users.url}/${id}`, httpBody, httpHeader)
+          .pipe(
+            tap(_ => this.log(`Metaupdated`)),
+            catchError(this.handleError<User>(`updateSlaapdoel`))
+          );
+  }
+
+  updateLocation(id: number, lat: string, long: string): Observable<User> {
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      })
+    };
+    const httpBody = {
+      'fields': {
+        lat: lat,
+        long: long
+      }
+    };
+
+    return this.http.post<User>(`${environment.api.url}${environment.api.jsonurl}${environment.api.endPoints.acf.url}${environment.api.endPoints.Users.url}/${id}`, httpBody, httpHeader)
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

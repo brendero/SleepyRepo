@@ -16,6 +16,7 @@ import { ToolsComponent } from './tools/tools.component';
 import { UserstatsComponent } from './userstats/userstats.component';
 import { FriendsDetailComponent } from './friends-detail/friends-detail.component';
 import { LogoutComponent } from './logout/logout.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LogoutComponent } from './logout/logout.component';
     FriendsDetailComponent,
     LogoutComponent,
     SplitPipe,
-    TrustHtmlPipe
+    TrustHtmlPipe,
+    QuizComponent
   ],
   imports: [
     BrowserModule,
