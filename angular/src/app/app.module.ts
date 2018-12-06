@@ -17,6 +17,7 @@ import { UserstatsComponent } from './userstats/userstats.component';
 import { FriendsDetailComponent } from './friends-detail/friends-detail.component';
 import { LogoutComponent } from './logout/logout.component';
 import { QuizComponent } from './quiz/quiz.component';
+import { PhotofeedAddComponent } from './photofeed-add/photofeed-add.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { QuizComponent } from './quiz/quiz.component';
     LogoutComponent,
     SplitPipe,
     TrustHtmlPipe,
-    QuizComponent
+    QuizComponent,
+    PhotofeedAddComponent
   ],
   imports: [
     BrowserModule,

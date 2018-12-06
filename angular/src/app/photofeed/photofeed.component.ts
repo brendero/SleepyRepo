@@ -32,18 +32,15 @@ export class PhotofeedComponent implements OnInit {
         likeList.splice(index, 1);
         this.photofeedService.updateLikes(postId, likeList)
           .subscribe(postData => {
-              console.log(postData);
                 heart.classList.add('far');
                 heart.classList.remove('fa');
                 heart.classList.remove('heartColor');
             });
-        console.log('whaddup');
       } else {
         likeList.push(this.activeUserID);
         this.photofeedService.updateLikes(postId, likeList)
             .subscribe(
               postData => {
-                console.log(postData);
                 heart.classList.remove('far');
                 heart.classList.add('fa');
                 heart.classList.add('heartColor');
@@ -54,12 +51,10 @@ export class PhotofeedComponent implements OnInit {
       likeList.push(this.activeUserID);
       this.photofeedService.updateLikes(postId, likeList)
       .subscribe(postData => {
-        console.log(postData);
         heart.classList.remove('far');
         heart.classList.add('fa');
         heart.classList.add('heartColor');
       });
-      console.log(likeList);
     }
   }
   getCurrentUser(): void {
@@ -71,32 +66,38 @@ export class PhotofeedComponent implements OnInit {
         });
   }
   getPosts(): void {
-    let postArray = [];
-    this.photofeedService.getPosts()
-        .subscribe(postData => {
-          postData.forEach(post => {
-            this.userFriends.forEach(friend => {
-              if (post.author === friend) {
-                postArray.push(post);
-              }
-            });
+    const postArray = [];
+    let counter = 0;
+    this.userFriends.forEach(friend => {
+      counter++;
+
+      this.photofeedService.filterPostByAuthor(friend)
+        .subscribe(post => {
+          post.forEach(friendPost => {
+            postArray.push(friendPost);
           });
-          this.posts = postArray;
-          this.checkLikes();
-        });
+      });
+
+      if (this.userFriends.length === counter) {
+        this.posts = postArray;
+        this.checkLikes();
+      }
+    });
   }
   checkLikes(): void {
     const postArray = this.posts;
     const ID = this.activeUserID;
     setTimeout(function() {
-      postArray.forEach(el => {
-        const heart = document.querySelector(`#heart${el.id}`);
-        if (el.acf.likes.indexOf(ID) > -1) {
+      postArray.forEach(element => {
+        const heart = document.querySelector(`#heart${element.id}`);
+        if (element.acf.likes.indexOf(ID) > -1) {
           heart.classList.remove('far');
           heart.classList.add('fa');
           heart.classList.add('heartColor');
         }
+      });
+
     }, 1000);
-    });
   }
+
 }

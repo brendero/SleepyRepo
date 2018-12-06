@@ -50,17 +50,13 @@ export class UserprofileComponent implements OnInit {
   getActiveUser(): void {
     this.authService.getActiveUser()
         .subscribe(userData => {
-          console.log(userData);
           this.user = userData;
           this.sliderValue = userData.meta.slaapdoel;
         });
   }
 
   sliderMove(): void {
-    console.log(this.sliderValue);
-    this.authService.updateSlaapdoel(this.user.id,this.sliderValue)
-        .subscribe(
-
-        );
+    this.authService.updateSlaapdoel(this.user.id, this.sliderValue)
+        .subscribe();
   }
 }

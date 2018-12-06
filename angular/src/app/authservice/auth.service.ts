@@ -45,6 +45,17 @@ export class AuthService {
     // return this.http.post
   }
 
+  getAllUsers(): Observable<User[]> {
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      })
+    };
+
+    return this.http.get<User[]>(`${this.tokenUrl}${environment.api.jsonendpoint}${environment.api.endPoints.Users.url}`, httpHeader);
+  }
+
   createUser(user: User): Observable<User> {
 
     const httpData = new HttpParams()
@@ -137,7 +148,7 @@ export class AuthService {
       }
     };
 
-    return this.http.post<User>(`${environment.api.url}${environment.api.jsonurl}${environment.api.endPoints.acf.url}${environment.api.endPoints.Users.url}/${id}`, httpBody, httpHeader)
+    return this.http.post<User>(`${this.tokenUrl}${environment.api.endPoints.acf.url}${environment.api.endPoints.Users.url}/${id}`, httpBody, httpHeader)
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

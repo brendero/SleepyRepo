@@ -1,3 +1,4 @@
+import { PhotofeedAddComponent } from './photofeed-add/photofeed-add.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FriendsDetailComponent } from './friends-detail/friends-detail.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'friends/:id', component: FriendsDetailComponent},
   {path: 'tools', component: ToolsComponent},
   {path: 'wokeuplikethis', component: PhotofeedComponent},
+  {path: 'wokeuplikethis/add', component: PhotofeedAddComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 @NgModule({
