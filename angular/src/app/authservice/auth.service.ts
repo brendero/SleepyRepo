@@ -57,7 +57,6 @@ export class AuthService {
   }
 
   createUser(user: User): Observable<User> {
-
     const httpData = new HttpParams()
                     .set('username', user.username)
                     .set('firstname', user.firstname)
@@ -88,11 +87,16 @@ export class AuthService {
   }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.tokenUrl}${environment.api.jsonendpoint}${environment.api.endPoints.Users.url}/${id}`, httpOptions)
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      })
+    };
+    return this.http.get<User>(`${this.tokenUrl}${environment.api.jsonendpoint}${environment.api.endPoints.Users.url}/${id}`, httpHeader)
           .pipe(
             tap(_ => this.log(`gotUser with Id: ${id}`)),
             catchError(this.handleError<User>('getUserWithId'))
-          )
+          );
   }
 
   updateUserPicture(id: number, avatar): Observable<User> {
@@ -149,6 +153,34 @@ export class AuthService {
     };
 
     return this.http.post<User>(`${this.tokenUrl}${environment.api.endPoints.acf.url}${environment.api.endPoints.Users.url}/${id}`, httpBody, httpHeader)
+  }
+
+  updateFriends(id: number, friendList: any): Observable<User> {
+    console.log(friendList);
+    const httpHeader = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      })
+    };
+    const httpBody = {
+      'fields': {
+        'friends': friendList
+      }
+    };
+    return this.http.post<User>(`${this.tokenUrl}${environment.api.endPoints.acf.url}${environment.api.endPoints.Users.url}/${id}`, httpBody, httpHeader)
+  }
+   /* GET Users whose name contains search term */
+   searchUsers(term: string): Observable<User[]> {
+    if (!term.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    console.log(`${this.tokenUrl}${environment.api.jsonendpoint}${environment.api.endPoints.Users.url}/?search=${term}`);
+    return this.http.get<User[]>(`${this.tokenUrl}${environment.api.jsonendpoint}${environment.api.endPoints.Users.url}/?search=${term}`).pipe(
+      tap(_ => this.log(`found Users matching "${term}"`)),
+      catchError(this.handleError<User[]>('searchUsers', []))
+    );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

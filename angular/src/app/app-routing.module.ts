@@ -1,3 +1,4 @@
+import { ClocksComponent } from './clocks/clocks.component';
 import { PhotofeedAddComponent } from './photofeed-add/photofeed-add.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'tools', component: ToolsComponent},
   {path: 'wokeuplikethis', component: PhotofeedComponent},
   {path: 'wokeuplikethis/add', component: PhotofeedAddComponent},
+  {path: 'clocks', component: ClocksComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 @NgModule({

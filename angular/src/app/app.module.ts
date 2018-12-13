@@ -18,6 +18,7 @@ import { FriendsDetailComponent } from './friends-detail/friends-detail.componen
 import { LogoutComponent } from './logout/logout.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { PhotofeedAddComponent } from './photofeed-add/photofeed-add.component';
+import { ClocksComponent } from './clocks/clocks.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PhotofeedAddComponent } from './photofeed-add/photofeed-add.component';
     SplitPipe,
     TrustHtmlPipe,
     QuizComponent,
-    PhotofeedAddComponent
+    PhotofeedAddComponent,
+    ClocksComponent
   ],
   imports: [
     BrowserModule,

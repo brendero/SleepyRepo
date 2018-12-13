@@ -13,6 +13,7 @@ declare var myExtObject: any;
 })
 export class AppComponent implements OnInit{
   user: User;
+
   constructor(
     public router: Router,
     private authService: AuthService) {}
@@ -21,29 +22,20 @@ export class AppComponent implements OnInit{
   ngOnInit() {
       this.getActiveUser();
   }
+
   ToggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const Hamburger = document.querySelector('#hamburger-icon');
     if (Hamburger.classList.contains('active')) {
+      document.querySelector('.nav-wrapper').setAttribute('style', 'z-index: 1001');
       Hamburger.classList.remove('active');
     }
     if (sidebar.classList.contains('open')) {
       sidebar.classList.remove('open');
     } else {
+      document.querySelector('.nav-wrapper').setAttribute('style', 'z-index: 1009');
       sidebar.classList.add('open');
       Hamburger.classList.add('active');
-    }
-  }
-  toggleSearchBar() {
-    const formGroup = document.querySelector('.form-group');
-    const form = document.querySelector('.form-wrapper');
-
-    if (formGroup.classList.contains('openInput')) {
-      formGroup.classList.remove('openInput');
-      form.setAttribute('style', 'z-index: 1;');
-    } else {
-      formGroup.classList.add('openInput');
-      form.setAttribute('style', 'z-index: 999;');
     }
   }
   getActiveUser(): void {

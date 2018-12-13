@@ -1,3 +1,20 @@
-<p>
-  friends-detail works!
-</p>
+<div *ngIf="user">
+    <div class="info-wrapper">
+      <i class="fa fa-chevron-left" (click)="goBack()"></i>
+      <div class="profile-info-wrapper">
+        <div class="img-wrapper">
+          <img src="{{user.meta.avatar}}">
+        </div>
+        <h4>{{user.name}}</h4>
+        <!-- TODO: make type of sleeper dynamic -->
+        <h6>Diepe Slaper</h6>
+      </div>
+    </div>
+    <div class="menu-container">
+
+      <ul class="user-menu">
+        <li><a routerLink="/profile/stats/{{user.id}}"><i class="fa fa-chart-bar"></i>stats</a></li>
+        <li class="addFriend-btn"><a (click)="this.toggleFriend()"><i class="fa fa-plus friendSymbol"></i><span id="btnText">Add as friend</span></a></li>
+      </ul>
+    </div>
+  </div>

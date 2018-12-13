@@ -1,3 +1,23 @@
+<form class="form-wrapper">
+  <div class="form-group">
+    <i class="fa fa-search icon" (click)="toggleSearchBar()"></i>
+    <input placeholder="search users" #searchBox id="search-box" (input)="search(searchBox.value)" />
+  </div>
+</form>
+
 <div id="map">
 
 </div>
+<ul class="search-result">
+  <li *ngFor="let user of users$ | async" >
+    <div class="user-info">
+      <a routerLink="/friends/{{user.id}}">
+        {{user.name}}
+      </a>
+      <p>Zachte Slaper</p>
+    </div>
+    <div class="user-thumb">
+      <img src="{{user.meta.avatar}}">
+    </div>
+  </li>
+</ul>

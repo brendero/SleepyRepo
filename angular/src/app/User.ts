@@ -4,6 +4,7 @@ export class User {
   firstname: string;
   lastname: string;
   email: string;
+  acf: Acf;
   meta: Meta;
   password: string;
 }
@@ -13,3 +14,13 @@ export class Meta {
   slaapdoel?: number;
 }
 
+export class Acf {
+  friends?: any;
+  location?: Location;
+}
+
+export class Location {
+  address?: string;
+  lat: string;
+  lng: string;
+}

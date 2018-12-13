@@ -1,6 +1,8 @@
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AuthService } from './../authservice/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../User';
+import { Subject, Observable } from 'rxjs';
 declare let L;
 
 @Component({
@@ -12,16 +14,29 @@ export class FriendsComponent implements OnInit {
   userId: number;
   userFriends: any;
   users: User[];
-
+  private map;
+  private searchTerms = new Subject<string>();
+  users$: Observable<User[]>;
   constructor(
     private authService: AuthService
   ) { }
 
   ngOnInit() {
+    this.users$ = this.searchTerms.pipe(
+      // wait 300ms after each keystroke before considering the term
+      debounceTime(300),
+
+      // ignore new term if same as previous term
+      distinctUntilChanged(),
+
+      // switch to new search observable each time the term changes
+      switchMap((term: string) => this.authService.searchUsers(term)));
     this.getActiveUser();
     this.initMap();
     // TODO: Display friends on map
-    // TODO: updateUserLocation
+  }
+  search(term: string): void {
+    this.searchTerms.next(term);
   }
   getActiveUser(): void {
     this.authService.getActiveUser()
@@ -31,47 +46,54 @@ export class FriendsComponent implements OnInit {
         this.DisplayFriends();
       });
   }
-  searchUsers(): void {
 
-  }
-  initMap(): void {
-    navigator.geolocation.getCurrentPosition(
-      function(position) {
+  initMap() {
         // TODO: add User location to API
-        const map = L.map('map', { zoomControl: false }).setView([position.coords.latitude, position.coords.longitude], 15);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        }).addTo(map);
-        const userIcon = L.icon({
-          // TODO: set icon as current user profile picture
-          iconUrl: '../../assets/img/Logo.svg',
-          iconSize: [38, 95],
-          iconAnchor: [22, 94],
-          popupAnchor: [-3, -76],
-        });
-        L.marker([position.coords.latitude, position.coords.longitude], {icon: userIcon}).addTo(map).bindPopup('this is the user');
-      },
-      function(err) {
-        console.log(err);
-      }
-    );
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            this.map = L.map('map', {zoomControl: false}).setView([position.coords.latitude, position.coords.longitude], 15);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            }).addTo(this.map);
+            const userIcon = L.icon({
+              // TODO: set icon as current user profile picture
+              iconUrl: '../../assets/img/Logo.svg',
+              iconSize: [38, 95],
+              iconAnchor: [22, 94],
+              popupAnchor: [-3, -76],
+            });
+            L.marker([position.coords.latitude, position.coords.longitude]).addTo(this.map).bindPopup('this is the user');
+          },
+          function(err) {
+            console.log(err);
+          });
+        } else {
+          alert('geolocation is not supported by this browser');
+        }
   }
 
   DisplayFriends(): void {
     // TODO: filter all users to only show friends
-    console.log(this.userFriends);
     this.userFriends.forEach(friend => {
       this.authService.getUserById(friend)
           .subscribe(friendData => {
             console.log(friendData);
-            const customPopup = `${friendData.name}<br/><img src='${friendData.acf.avatar}' style="border-radius:100%;"/>`;
-
-            L.marker([friendData.acf.location.lat, friendData.acf.location.lng]).addTo(map).bindPopup(customPopup);
+            // TODO: style custom popup that shows user information
+            const customPopup = `<a href='/friends/${friendData.id}' style="display:flex; align-items:center;"><img src='${friendData.meta.avatar}' style='width:54px; height: 54px;border-radius: 100%; padding: 5px;'/>${friendData.name}</a>`;
+            // TODO: make custom marker icon that uses friends avatar
+            L.marker([friendData.acf.location.lat, friendData.acf.location.lng]).addTo(this.map).bindPopup(customPopup);
           });
     });
-    // TODO: get location of friends
-    // TODO: use that location to put marker on map
-    // TODO: make custom popup that shows user information
-    // TODO: make custom marker that uses friends avatar
+  }
+  toggleSearchBar() {
+    const form = document.querySelector('.form-wrapper');
+
+    if (form.classList.contains('openInput')) {
+      form.classList.remove('openInput');
+      form.setAttribute('style', 'z-index: none;');
+    } else {
+      form.classList.add('openInput');
+      form.setAttribute('style', 'z-index: 1001;');
+    }
   }
 }

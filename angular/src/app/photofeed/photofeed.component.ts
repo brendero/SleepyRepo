@@ -1,8 +1,6 @@
-import { element } from 'protractor';
-import { MessageService } from './../messageService/message.service';
 import { AuthService } from './../authservice/auth.service';
 import { PhotofeedService } from './../photofeedservice/photofeed.service';
-import { Component, OnInit, AfterContentInit, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Post } from '../Post';
 
 @Component({
@@ -17,11 +15,11 @@ export class PhotofeedComponent implements OnInit {
   constructor(
     private photofeedService: PhotofeedService,
     private authService: AuthService,
-    private messageService: MessageService
   ) { }
 
   ngOnInit() {
     this.getCurrentUser();
+    // TODO: make a functionality to sort posts
   }
 
   updateLike(likeList, postId): void {
@@ -66,16 +64,18 @@ export class PhotofeedComponent implements OnInit {
         });
   }
   getPosts(): void {
+    // TODO: ORDER BY last created
     const postArray = [];
     let counter = 0;
     this.userFriends.forEach(friend => {
       counter++;
-
+      console.log(friend);
       this.photofeedService.filterPostByAuthor(friend)
-        .subscribe(post => {
-          post.forEach(friendPost => {
-            postArray.push(friendPost);
-          });
+      .subscribe(post => {
+        console.log(post);
+        post.forEach(friendPost => {
+          postArray.push(friendPost);
+        });
       });
 
       if (this.userFriends.length === counter) {
