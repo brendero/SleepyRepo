@@ -1,3 +1,28 @@
-<p>
-  homescreen works!
-</p>
+<div class="container">
+  <form class="sleep-form" (ngSubmit)="submitSleep()">
+    <label for="startDate">Wanneer ben je gaan slapen?</label>
+    <div>
+      <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate">
+      <i class="far fa-calendar-alt"></i>
+    </div>
+    <label for="endDate">Wanneer ben je opgestaan?</label>
+    <div>
+      <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate">
+      <i class="far fa-calendar-alt"></i>
+    </div>
+    <label for="sleepHour">Hoe laat ben je gaan slapen?</label>
+    <div>
+      <input type="time" id="sleepHour" name="sleephour" [(ngModel)]="sleepHour">
+      <i class="far fa-clock"></i>
+    </div>
+    <label for="wakeHour">Hoe vroeg ben je opgestaan?</label>
+    <div>
+      <input type="time" id="wakeHour" name="wakeHour" [(ngModel)]="wakeHour">
+      <i class="far fa-clock"></i>
+    </div>
+
+    <button type="submit">
+        Submit
+    </button>
+  </form>
+</div>

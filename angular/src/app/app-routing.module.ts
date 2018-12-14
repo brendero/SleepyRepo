@@ -25,8 +25,8 @@ const routes: Routes = [
   {path: 'friends', component: FriendsComponent},
   {path: 'friends/:id', component: FriendsDetailComponent},
   {path: 'tools', component: ToolsComponent},
-  {path: 'wokeuplikethis', component: PhotofeedComponent},
-  {path: 'wokeuplikethis/add', component: PhotofeedAddComponent},
+  {path: 'weeklyhashtag', component: PhotofeedComponent},
+  {path: 'weeklyhashtag/add', component: PhotofeedAddComponent},
   {path: 'clocks', component: ClocksComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];

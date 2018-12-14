@@ -18,7 +18,7 @@ export const environment = {
         url: 'users'
       },
       photofeed: {
-        url: 'wokeuplikethis'
+        url: 'weeklyhashtag'
       },
       tools: {
         url: 'rest_tools'

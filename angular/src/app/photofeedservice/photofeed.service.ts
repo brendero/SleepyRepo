@@ -33,7 +33,7 @@ export class PhotofeedService {
     return this.http.get<Post>(`${this.postUrl}/${id}?_embed`, httpOptions);
   }
   filterPostByAuthor(id: number): Observable<Post[]> {
-    return this.http.get<Post[]>(`http://localhost/wp-json/wp/v2/wokeuplikethis?_embed&?filter[meta_key]=author&filter[meta_value]=${id}`);
+    return this.http.get<Post[]>(`${this.postUrl}?_embed&?filter[meta_key]=author&filter[meta_value]=${id}`, httpOptions);
   }
   updateLikes(id: number, likeList): Observable<Post> {
     const httpHeader = {
