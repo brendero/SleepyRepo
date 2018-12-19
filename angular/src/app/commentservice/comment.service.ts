@@ -4,6 +4,7 @@ import { MessageService } from './../messageService/message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { Comment } from '../comment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -25,13 +26,20 @@ export class CommentService {
   ) { }
 
   getCommentsByPostId(id: number): Observable<Comment[]> {
-    return this.http.get<Comment[]>(`${this.commentUrl}?post=${id}&_embed`)
+    return this.http.get<Comment[]>(`${this.commentUrl}?post=${id}&_embed`, httpOptions)
           .pipe(
             tap(comments => this.log('fetched comments')),
-            catchError(this.handleError<any>('getCommentByPostId'))
+            catchError(this.handleError<Comment[]>('getCommentByPostId'))
           );
   }
 
+  postComment(comment: Comment): Observable<Comment> {
+    return this.http.post<Comment>(`${this.commentUrl}`, comment, httpOptions)
+          .pipe(
+            tap(_ => this.log(`Created comment`)),
+            catchError(this.handleError<Comment>('created comment'))
+          );
+  }
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

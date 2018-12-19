@@ -3,4 +3,5 @@ export class Comment {
   author: number;
   date: Date;
   content: string;
+  post: number;
 }

@@ -2,6 +2,7 @@ import { CommentService } from './../commentservice/comment.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Comment } from '../comment';
 
 @Component({
   selector: 'app-comment',
@@ -36,12 +37,17 @@ export class CommentComponent implements OnInit {
         });
   }
 
-  // postComment(): void {
-  //   const id = +this.route.snapshot.paramMap.get('id');
-  //   this.postedComment = new Comment();
-  //   this.commentService.postComment(id, this.postedComment)
-  //       .subscribe(comment => {
-  //         console.log(comment);
-  //       });
-  // }
+  postComment(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+
+    this.postedComment = new Comment();
+    this.postedComment.post = id;
+    this.postedComment.content = this.commentValue;
+
+    this.commentService.postComment(this.postedComment)
+        .subscribe(comment => {
+          console.log(comment);
+          this.getComments();
+        });
+  }
 }
