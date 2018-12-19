@@ -1,0 +1,21 @@
+<div class="header-wrapper">
+  <i class="fa fa-chevron-left" (click)="goBack()"></i>
+  <h1>reacties</h1>
+</div>
+
+<div class="comments-list">
+  <div class="comment-wrapper" *ngFor="let comment of comments">
+    <div class="comment-img">
+      <img src="{{comment._embedded.author[0].acf.avatar}}">
+    </div>
+    <div class="comment-body">
+      <h6>{{comment.author_name}}</h6>
+      <p>{{ comment.content.rendered}}</p>
+    </div>
+  </div>
+</div>
+
+<form class="comment-form" (ngSubmit)="postComment()">
+  <input placeholder="voeg een reactie toe" type="text" name="commentValue" [(ngModel)]="commentValue">
+  <button type="submit"><i class="fa fa-paper-plane"></i></button>
+</form>

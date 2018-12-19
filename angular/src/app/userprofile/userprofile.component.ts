@@ -52,6 +52,7 @@ export class UserprofileComponent implements OnInit {
         .subscribe(userData => {
           this.user = userData;
           this.sliderValue = userData.meta.slaapdoel;
+          console.log(userData);
         });
   }
 

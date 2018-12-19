@@ -138,7 +138,7 @@ export class AuthService {
           );
   }
 
-  updateLocation(id: number, lat: string, long: string): Observable<User> {
+  updateLocation(id: number, lat: number, long: number): Observable<User> {
     const httpHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -147,16 +147,21 @@ export class AuthService {
     };
     const httpBody = {
       'fields': {
-        lat: lat,
-        long: long
+        'location': {
+          'adress': '',
+          'lat': lat,
+          'lng': long
+        }
       }
     };
-
     return this.http.post<User>(`${this.tokenUrl}${environment.api.endPoints.acf.url}${environment.api.endPoints.Users.url}/${id}`, httpBody, httpHeader)
+          .pipe(
+            tap(_ => this.log(`location updated`)),
+            catchError(this.handleError<User>(`updateLocation`))
+          );
   }
 
   updateFriends(id: number, friendList: any): Observable<User> {
-    console.log(friendList);
     const httpHeader = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -186,13 +191,10 @@ export class AuthService {
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
-      // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
 
-      // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }

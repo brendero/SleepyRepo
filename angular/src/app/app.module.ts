@@ -19,6 +19,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { PhotofeedAddComponent } from './photofeed-add/photofeed-add.component';
 import { ClocksComponent } from './clocks/clocks.component';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ClocksComponent } from './clocks/clocks.component';
     TrustHtmlPipe,
     QuizComponent,
     PhotofeedAddComponent,
-    ClocksComponent
+    ClocksComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

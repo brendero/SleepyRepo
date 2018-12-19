@@ -13,7 +13,7 @@
       </div>
       <div class="meta-box">
         <i id="heart{{post.id}}" class="far fa-heart" (click)="updateLike(post.acf.likes, post.id)"></i> <span *ngIf="post.acf.likes" >{{post.acf.likes.length}}</span> Likes
-        <i class="far fa-comment-alt"></i> <span *ngIf="post._embedded['replies']">{{post._embedded['replies'][0].length}}</span> comments
+        <i class="far fa-comment-alt" routerLink="{{post.id}}/comments"></i> <span *ngIf="post._embedded['replies']">{{post._embedded['replies'][0].length}}</span> comments
         <!-- TODO: add date -->
         <!-- <span class="post-date"> {{post.date}} </span> -->
       </div>

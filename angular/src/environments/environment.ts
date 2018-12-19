@@ -28,6 +28,12 @@ export const environment = {
       },
       acf: {
         url: 'acf/v3/'
+      },
+      sleeptracking: {
+        url: 'sleeptracking'
+      },
+      comments: {
+        url: 'comments'
       }
     }
   }

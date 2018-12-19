@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PhotofeedComponent } from './photofeed/photofeed.component';
+import { CommentComponent } from './comment/comment.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'tools', component: ToolsComponent},
   {path: 'weeklyhashtag', component: PhotofeedComponent},
   {path: 'weeklyhashtag/add', component: PhotofeedAddComponent},
+  {path: 'weeklyhashtag/:id/comments', component: CommentComponent},
   {path: 'clocks', component: ClocksComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
