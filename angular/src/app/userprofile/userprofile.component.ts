@@ -3,7 +3,6 @@ import { AuthService } from './../authservice/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { User, Meta } from '../User';
-import { throttleTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-userprofile',

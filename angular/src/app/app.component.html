@@ -1,4 +1,4 @@
-<div class="sidebar" *ngIf="router.url != '/login' && router.url !='/register' && router.url !='/profile'">
+<div class="sidebar" *ngIf="router.url == '/home' || router.url == '/friends' || router.url == '/tools' || router.url == '/weeklyhashtag'">
   <div class="sidebar-profile" *ngIf="user">
     <div class="profile-wrap">
       <div class="profile-pic-wrap">

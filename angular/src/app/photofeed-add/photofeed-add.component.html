@@ -1,7 +1,24 @@
+<div class="header">
+  <i class="fa fa-chevron-left" (click)="goBack()"></i>
+  <h1>Add new</h1>
+</div>
+<!-- TODO: add form validation -->
 <div class="container">
-  <form (ngSubmit)="onSubmit()">
-    <h1>Add a new post</h1>
-    <input [(ngModel)]="picture">
-    <textarea maxlength="120" [(ngModel)]="description"></textarea>
+  <form (ngSubmit)="postSubmit()">
+    <div class="textarea-wrapper">
+      <h4>zet de beschrijving van je post</h4>
+      <textarea maxlength="60" name="description" [(ngModel)]="description"></textarea>
+    </div>
+    <div>
+      <div class="upload-btn-wrapper">
+        <button class="btn"><i class="fa fa-paperclip"></i></button>
+        <input type="file" accept="image/*" (change)="setImage($event)">
+        <input type="text" name="image" [(ngModel)]="fileName" placeholder="Select your file" disabled>
+      </div>
+      <img src="{{previewImg}}" style="width: 100%">
+    </div>
+    <button type="submit" class="add-post-btn">
+      Submit
+    </button>
   </form>
 </div>

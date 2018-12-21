@@ -1,4 +1,63 @@
+@import '../../styles.sass'
+
+.header
+  background: $primary
+  padding: 20px
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  i
+    width: 100%
+    font-size: larger
+  h1
+    font-family: 'roboto'
+    font-weight: 100
 .container
-  margin-top: 95px!important
-  width: 80%
+  margin-top: 20px
+  width: 90%
   margin: auto
+h4
+  font-family: 'roboto'
+  font-weight: 300
+.textarea-wrapper
+  textarea
+    width: 100%
+    height: 100px
+    border-radius: 6px
+.add-post-btn
+  background: $white
+  border: 1px solid black
+  padding: 10px
+  border-radius: 6px
+
+.btn
+  border: none
+  color: $black
+  background-color: $accent
+  padding: 12px
+  border-radius: 100%
+  font-weight: bold
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16)
+  i
+    padding: 0
+    font-size: medium
+
+.upload-btn-wrapper
+  position: relative
+  display: inline-block
+  width: 100%
+  margin: 14px 0
+  input[type=text]
+    background: $white
+    border: none
+    width: 77%
+    border-bottom: 1px dotted black
+    margin-left: 5px
+    padding: 9px
+.upload-btn-wrapper input[type=file]
+  width: 41px
+  height: 41px
+  position: absolute
+  left: 0
+  top: 0
+  opacity: 0

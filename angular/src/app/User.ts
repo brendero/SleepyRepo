@@ -3,6 +3,7 @@ export class User {
   username: string;
   firstname: string;
   lastname: string;
+  name: string;
   email: string;
   acf: Acf;
   meta: Meta;

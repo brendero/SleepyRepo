@@ -8,7 +8,7 @@ import { tap, catchError } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Type': 'application/json',
     'Authorization': `Bearer ${localStorage.getItem('token')}`
   })
 }
@@ -36,24 +36,29 @@ export class PhotofeedService {
     return this.http.get<Post[]>(`${this.postUrl}?_embed&?filter[meta_key]=author&filter[meta_value]=${id}`, httpOptions);
   }
   updateLikes(id: number, likeList): Observable<Post> {
-    const httpHeader = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
     const httpBody = {
       'fields': {
         'likes': likeList
       }
     };
 
-    return this.http.post<Post>(`${environment.api.url}${environment.api.jsonurl}${environment.api.endPoints.acf.url}${environment.api.endPoints.photofeed.url}/${id}`, httpBody, httpHeader)
+    return this.http.post<Post>(`${environment.api.url}${environment.api.jsonurl}${environment.api.endPoints.acf.url}${environment.api.endPoints.photofeed.url}/${id}`, httpBody, httpOptions)
           .pipe(
             tap(_ => this.log(`userUpdated`)),
             catchError(this.handleError<Post>('updateUserPicture'))
           );
   }
+
+  createPost(data: Post): Observable<Post> {
+    console.log(data);
+
+    return this.http.post<Post>(`${this.postUrl}`, data, httpOptions)
+          .pipe(
+            tap(_ => this.log(`postCreated`)),
+            catchError(this.handleError<Post>('createPost'))
+          );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
