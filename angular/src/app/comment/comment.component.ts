@@ -32,7 +32,6 @@ export class CommentComponent implements OnInit {
 
     this.commentService.getCommentsByPostId(id)
         .subscribe(commentsData => {
-          console.log(commentsData);
           this.comments = commentsData;
         });
   }
@@ -46,7 +45,6 @@ export class CommentComponent implements OnInit {
 
     this.commentService.postComment(this.postedComment)
         .subscribe(comment => {
-          console.log(comment);
           this.getComments();
         });
   }

@@ -33,7 +33,6 @@ export class PhotofeedAddComponent implements OnInit {
     formData.append('file', this.imageAttachment);
     this.mediaService.createFeatured(formData)
         .subscribe(imgData => {
-          console.log(imgData);
           this.featuredImage = imgData.id;
           this.makeNewPost();
         });
@@ -47,12 +46,10 @@ export class PhotofeedAddComponent implements OnInit {
     // setup new post then post to API
     this.photofeedService.createPost(this.newPost)
         .subscribe(postData => {
-          console.log(postData);
           this.goBack();
         });
   }
   setImage($event): void {
-    console.log($event);
     this.setThis($event.target);
   }
   setThis(inputValue: any): void {
@@ -61,8 +58,8 @@ export class PhotofeedAddComponent implements OnInit {
 
     if (file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/gif') {
       this.imageAttachment = file;
-      this.fileName = this.imageAttachment.name;
       console.log(this.imageAttachment);
+      this.fileName = this.imageAttachment.name;
       reader.onload = e => this.previewImg = reader.result;
 
       reader.readAsDataURL(file);

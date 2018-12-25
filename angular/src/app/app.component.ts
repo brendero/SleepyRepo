@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   title = 'Sleepy';
 
   ngOnInit() {
-      this.getActiveUser();
+    this.getActiveUser();
   }
 
   ToggleSidebar() {

@@ -1,4 +1,3 @@
-import { ClocksComponent } from './clocks/clocks.component';
 import { PhotofeedAddComponent } from './photofeed-add/photofeed-add.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -29,7 +28,6 @@ const routes: Routes = [
   {path: 'weeklyhashtag', component: PhotofeedComponent},
   {path: 'weeklyhashtag/add', component: PhotofeedAddComponent},
   {path: 'weeklyhashtag/:id/comments', component: CommentComponent},
-  {path: 'clocks', component: ClocksComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 @NgModule({

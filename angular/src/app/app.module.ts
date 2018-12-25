@@ -1,7 +1,7 @@
 import { TrustHtmlPipe, SplitPipe } from './pipeService/pipe.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,7 +18,6 @@ import { FriendsDetailComponent } from './friends-detail/friends-detail.componen
 import { LogoutComponent } from './logout/logout.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { PhotofeedAddComponent } from './photofeed-add/photofeed-add.component';
-import { ClocksComponent } from './clocks/clocks.component';
 import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
@@ -38,11 +37,11 @@ import { CommentComponent } from './comment/comment.component';
     TrustHtmlPipe,
     QuizComponent,
     PhotofeedAddComponent,
-    ClocksComponent,
     CommentComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule

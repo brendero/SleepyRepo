@@ -3,28 +3,34 @@
 </div>
 <!-- TODO: add form validation -->
 <div class="register-form-wrapper">
-  <form (ngSubmit)="registerUser()" class="register-form">
+  <form (ngSubmit)="registerUser()" class="register-form" [formGroup]="registerForm">
     <div>
       <i class="far fa-user"></i>
-      <input type="text" title="username" id="username" name="username" placeholder="Username" [(ngModel)]="username">
+      <input type="text" title="username" placeholder="Username" formControlName="username">
     </div>
+    <span class="error-msg" *ngIf="registerForm.get('username').invalid && (submitted || registerForm.get('username').dirty || registerForm.get('username').touched)">please provide a valid username</span>
     <div>
       <i class="far fa-user"></i>
-      <input type="text" title="firstName" id="firstName" name="firstName" placeholder="First Name" [(ngModel)]="firstName">
+      <input type="text" title="firstName" placeholder="First Name" formControlName="firstName">
     </div>
+    <span class="error-msg" *ngIf="registerForm.get('firstName').invalid && (submitted || registerForm.get('firstName').dirty || registerForm.get('firstName').touched)">please provide a first name</span>
     <div>
       <i class="far fa-user"></i>
-      <input type="text" title="lastName" id="lastName" name="lastName" placeholder="Last Name" [(ngModel)]="lastName">
+      <input type="text" title="lastName" placeholder="Last Name" formControlName="lastName">
     </div>
+    <span class="error-msg" *ngIf="registerForm.get('lastName').invalid && (submitted || registerForm.get('lastName').dirty || registerForm.get('lastName').touched)">please provide a last name</span>
     <div>
       <i class="far fa-envelope"></i>
-      <input type="email" title="email" id="email" name="email" placeholder="Email" [(ngModel)]="email">
+      <input type="email" title="email" placeholder="Email" formControlName="email">
     </div>
+    <span class="error-msg" *ngIf="registerForm.get('email').invalid && (submitted || registerForm.get('email').dirty || registerForm.get('email').touched)">please provide a valid email</span>
     <div>
       <i class="fa fa-lock"></i>
-      <input type="password" title="password" id="password" name="password" placeholder="Password" [(ngModel)]="password">
+      <input type="password" title="password" placeholder="Password" formControlName="password">
     </div>
+    <span class="error-msg" *ngIf="registerForm.get('password').invalid && (submitted || registerForm.get('password').dirty || registerForm.get('password').touched)">please provide a password</span>
 
+    <span class="error-msg" *ngIf="httpErrorMessage">{{httpErrorMessage}}</span>
     <button type="submit">
       register
     </button>

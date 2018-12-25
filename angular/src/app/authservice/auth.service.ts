@@ -34,8 +34,7 @@ export class AuthService {
 
     return this.http.post<AuthToken>(`${this.tokenUrl}${environment.api.endPoints.auth.url}`, httpBody, httpOptions)
                 .pipe(
-                  tap(token => this.log('fetched Tokens')),
-                  catchError(this.handleError<AuthToken>('userLogin'))
+                  tap(token => this.log('fetched Tokens'))
                 );
   }
 
@@ -67,8 +66,7 @@ export class AuthService {
 
     return this.http.post<User>(`${this.tokenUrl}${environment.api.jsonendpoint}${environment.api.endPoints.Users.url}/register`, httpData, httpOptions)
           .pipe(
-            tap(newUser => this.log(`Created user ${newUser}`)),
-            catchError(this.handleError<User>('createUser'))
+            tap(newUser => this.log(`Created user ${newUser}`))
           );
   }
 
@@ -181,7 +179,6 @@ export class AuthService {
       // if not search term, return empty hero array.
       return of([]);
     }
-    console.log(`${this.tokenUrl}${environment.api.jsonendpoint}${environment.api.endPoints.Users.url}/?search=${term}`);
     return this.http.get<User[]>(`${this.tokenUrl}${environment.api.jsonendpoint}${environment.api.endPoints.Users.url}/?search=${term}`).pipe(
       tap(_ => this.log(`found Users matching "${term}"`)),
       catchError(this.handleError<User[]>('searchUsers', []))

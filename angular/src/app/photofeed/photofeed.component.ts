@@ -69,10 +69,8 @@ export class PhotofeedComponent implements OnInit {
     let counter = 0;
     this.userFriends.forEach(friend => {
       counter++;
-      console.log(friend);
       this.photofeedService.filterPostByAuthor(friend)
       .subscribe(post => {
-        console.log(post);
         post.forEach(friendPost => {
           postArray.push(friendPost);
         });

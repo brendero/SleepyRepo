@@ -76,7 +76,6 @@ export class FriendsComponent implements OnInit {
     this.userFriends.forEach(friend => {
       this.authService.getUserById(friend)
           .subscribe(friendData => {
-            console.log(friendData);
             const customPopup = `<a href='/friends/${friendData.id}' style="display:flex; align-items:center;"><img src='${friendData.meta.avatar}' style='width:54px; height: 54px;border-radius: 100%; padding: 5px;'/>${friendData.name}</a>`;
             // TODO: make custom marker icon that uses friends avatar
             L.marker([friendData.acf.location.lat, friendData.acf.location.lng]).addTo(this.map).bindPopup(customPopup);

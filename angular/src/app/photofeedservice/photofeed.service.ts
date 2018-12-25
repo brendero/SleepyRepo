@@ -50,8 +50,6 @@ export class PhotofeedService {
   }
 
   createPost(data: Post): Observable<Post> {
-    console.log(data);
-
     return this.http.post<Post>(`${this.postUrl}`, data, httpOptions)
           .pipe(
             tap(_ => this.log(`postCreated`)),

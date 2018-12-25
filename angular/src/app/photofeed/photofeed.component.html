@@ -1,5 +1,6 @@
 <div class="container">
   <div class="post-card" *ngFor="let post of posts">
+    <!-- Order by last created -->
     <div class="poster-wrap">
       <div>
         <img src="{{post._embedded['author']['0'].acf.avatar}}">
@@ -12,10 +13,11 @@
         <span [innerHTML]="post.content.rendered | trustHtml"></span>
       </div>
       <div class="meta-box">
-        <i id="heart{{post.id}}" class="far fa-heart" (click)="updateLike(post.acf.likes, post.id)"></i> <span *ngIf="post.acf.likes" >{{post.acf.likes.length}}</span> Likes
-        <i class="far fa-comment-alt" routerLink="{{post.id}}/comments"></i> <span *ngIf="post._embedded['replies']">{{post._embedded['replies'][0].length}}</span> comments
-        <!-- TODO: add date -->
-        <!-- <span class="post-date"> {{post.date}} </span> -->
+        <div>
+          <i id="heart{{post.id}}" class="far fa-heart" (click)="updateLike(post.acf.likes, post.id)"></i> <span *ngIf="post.acf.likes" >{{post.acf.likes.length}}</span> Likes
+          <i class="far fa-comment-alt" routerLink="{{post.id}}/comments"></i> <span *ngIf="post._embedded['replies']">{{post._embedded['replies'][0].length}}</span> comments
+        </div>
+        <span class="post-date"> {{post.date | date: "dd/MM/yy"}} </span>
       </div>
     </div>
   </div>

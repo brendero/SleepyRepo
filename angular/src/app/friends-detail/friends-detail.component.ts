@@ -36,7 +36,6 @@ export class FriendsDetailComponent implements OnInit {
   getActiveUser(): void {
     this.authService.getActiveUser()
         .subscribe(activeUser => {
-          console.log(activeUser);
           this.friendList = activeUser.acf.friends;
           this.activeUserId = activeUser.id;
           this.checkIfFriends();
@@ -52,7 +51,6 @@ export class FriendsDetailComponent implements OnInit {
     const btnText = document.querySelector('#btnText');
 
     if (this.friendList.indexOf(userId) > -1) {
-      console.log('whaddup');
       addFriendBtn.classList.add('btn-active');
       friendSymbol.classList.remove('fa-plus');
       friendSymbol.classList.add('fa-check');
