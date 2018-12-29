@@ -34,6 +34,9 @@ export const environment = {
       },
       comments: {
         url: 'comments'
+      },
+      categories: {
+        url: 'categories'
       }
     }
   }

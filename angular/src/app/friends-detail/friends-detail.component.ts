@@ -1,3 +1,4 @@
+import { QuizService } from './../quizservice/quiz.service';
 import { AuthService } from './../authservice/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -13,11 +14,13 @@ export class FriendsDetailComponent implements OnInit {
   user: User;
   activeUserId: number;
   friendList: any;
+  sleepType: string;
 
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
-    private location: Location
+    private location: Location,
+    private quizService: QuizService
   ) { }
 
   ngOnInit() {
@@ -31,7 +34,11 @@ export class FriendsDetailComponent implements OnInit {
     this.authService.getUserById(id)
         .subscribe(userData => {
           this.user = userData;
+          this.getSleepType();
         });
+  }
+  getSleepType(): void {
+    this.sleepType = this.quizService.returnTypeQuiz(this.user.acf.sleeptype);
   }
   getActiveUser(): void {
     this.authService.getActiveUser()

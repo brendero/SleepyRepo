@@ -1,3 +1,4 @@
+import { QuizService } from './../quizservice/quiz.service';
 import { FileReaderService } from './../fileReaderService/file-reader.service';
 import { AuthService } from './../authservice/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,11 +15,12 @@ export class UserprofileComponent implements OnInit {
   image64: string;
   meta: Meta;
   sliderValue: number;
-
+  sleepType: string;
   constructor(
     private authService: AuthService,
     private fileReaderService: FileReaderService,
-    private location: Location
+    private location: Location,
+    private quizService: QuizService
   ) { }
 
   ngOnInit() {
@@ -51,11 +53,15 @@ export class UserprofileComponent implements OnInit {
         .subscribe(userData => {
           this.user = userData;
           this.sliderValue = userData.meta.slaapdoel;
+          this.getSleepType();
         });
   }
 
   sliderMove(): void {
     this.authService.updateSlaapdoel(this.user.id, this.sliderValue)
         .subscribe();
+  }
+  getSleepType(): void {
+    this.sleepType = this.quizService.returnTypeQuiz(this.user.acf.sleeptype);
   }
 }

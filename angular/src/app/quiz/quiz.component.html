@@ -1,4 +1,84 @@
-<!-- TODO: make quiz -->
-<p>
-  quiz works!
-</p>
+<div class="header">
+  <h1>Quiz</h1>
+</div>
+<div class="container">
+  <form (ngSubmit)="submitQuiz()" class="quiz-form">
+    <h2>Bepaal welk soort slaper je bent</h2>
+    <div class="question-wrapper">
+      <h1>1. Slaap</h1>
+      <div>
+        <input type="radio" name="sleep" id="loveit" [(ngModel)]="sleep" value="2"><label for="loveit">i love it</label>
+      </div>
+      <div>
+        <input type="radio" name="sleep" id="nodig" [(ngModel)]="sleep" value="4"><label for="nodig">Is nodig, maar heb er niet altijd even veel zin in</label>
+      </div>
+      <div>
+        <input type="radio" name="sleep" id="nutteloos" [(ngModel)]="sleep" value="6"><label for="nutteloos">Zo nutteloos, ik doe liever iets anders!</label>
+      </div>
+    </div>
+
+    <div class="question-wrapper">
+      <h1>2. Lang uitslapen in het weekend</h1>
+      <div>
+        <input type="radio" name="uitslapen" id="sws" [(ngModel)]="weekend" value="2"><label for="sws">Sowiesooooo! Mij zie je voor 10u niet verschijnen</label>
+      </div>
+      <div>
+        <input type="radio" name="uitslapen" id="hoeftniet" [(ngModel)]="weekend" value="4"><label for="hoeftniet">Hoeft niet, ik word wakker op mijn vast uur!</label>
+      </div>
+      <div>
+        <input type="radio" name="uitslapen" id="nietlanger" [(ngModel)]="weekend" value="6"><label for="nietlanger">Is voor mij niet langer dan 9u-9u30.</label>
+      </div>
+    </div>
+
+    <div class="question-wrapper">
+      <h1>3. Slaap jij makkelijk in?</h1>
+      <div>
+        <input type="radio" name="inslapen" id="piekeren" [(ngModel)]="inslapen" value="2"><label for="piekeren">Ik lig vaak nog lang te woelen en piekeren</label>
+      </div>
+      <div>
+        <input type="radio" name="inslapen" id="relatiefsnel" [(ngModel)]="inslapen" value="4"><label for="relatiefsnel">Ik slaap relatief snel in</label>
+      </div>
+      <div>
+        <input type="radio" name="inslapen" id="meteen" [(ngModel)]="inslapen" value="6"><label for="meteen">Ik slaap vrijwel meteen in</label>
+      </div>
+    </div>
+
+    <div class="question-wrapper">
+      <h1>4. Ochtendmodus</h1>
+      <div>
+        <input type="radio" name="ochtendmodus" id="zombie" [(ngModel)]="ochtendmodus" value="2"><label for="zombie">Zombie</label>
+      </div>
+      <div>
+        <input type="radio" name="ochtendmodus" id="frissevis" [(ngModel)]="ochtendmodus" value="4"><label for="frissevis">Fris als 'n vis</label>
+      </div>
+      <div>
+        <input type="radio" name="ochtendmodus" id="groggy" [(ngModel)]="ochtendmodus" value="6"><label for="groggy">Groggy maar gaat snel over</label>
+      </div>
+    </div>
+
+    <div class="question-wrapper">
+      <h1>5. Overdag</h1>
+      <div>
+        <input type="radio" name="overdag" id="geeuwen" [(ngModel)]="overdag" value="2"><label for="geeuwen">Blijk ik gewoon de hele dag door geeuwen</label>
+      </div>
+      <div>
+        <input type="radio" name="overdag" id="middag" [(ngModel)]="overdag" value="4"><label for="middag">Kom ik er tegen de middag wel door</label>
+      </div>
+      <div>
+        <input type="radio" name="overdag" id="avond" [(ngModel)]="overdag" value="6"><label for="avond">Wordt ik tegen de avond goed moe</label>
+      </div>
+    </div>
+
+    <button type="submit" class="quiz-submit">submit</button>
+  </form>
+<div class="overlay-result" *ngIf="sleepType">
+  <div class="result-popup">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKIxaPkkX9HSSvUkHJ2HPZH8m_1a4qAdpjjKhJiSFVM0_azcsw">
+    <div>
+      <h1>Proficiat!</h1>
+      <h2>Je bent een</h2>
+    </div>
+    <h1>{{sleepType}}</h1>
+  </div>
+</div>
+</div>

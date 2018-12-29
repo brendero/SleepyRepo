@@ -1,14 +1,10 @@
 <div class="container">
   <!-- TODO: add form validation -->
+  <!-- TODO: add Toast message on submit -->
   <form class="sleep-form" (ngSubmit)="submitSleep()">
     <label for="startDate">Wanneer ben je gaan slapen?</label>
     <div>
       <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate">
-      <i class="far fa-calendar-alt"></i>
-    </div>
-    <label for="endDate">Wanneer ben je opgestaan?</label>
-    <div>
-      <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate">
       <i class="far fa-calendar-alt"></i>
     </div>
     <label for="sleepHour">Hoe laat ben je gaan slapen?</label>

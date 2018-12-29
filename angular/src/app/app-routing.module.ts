@@ -1,3 +1,4 @@
+import { OwnPostsComponent } from './own-posts/own-posts.component';
 import { PhotofeedAddComponent } from './photofeed-add/photofeed-add.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -19,8 +20,9 @@ const routes: Routes = [
   {path: 'logout', component: LogoutComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: UserprofileComponent},
-  {path: 'profile/stats/:id', component: UserstatsComponent},
-  {path: 'profile/quiz/:id', component: QuizComponent},
+  {path: 'profile/stats', component: UserstatsComponent},
+  {path: 'profile/quiz', component: QuizComponent},
+  {path: 'profile/posts', component: OwnPostsComponent},
   {path: 'home', component: HomescreenComponent},
   {path: 'friends', component: FriendsComponent},
   {path: 'friends/:id', component: FriendsDetailComponent},

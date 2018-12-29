@@ -1,4 +1,4 @@
-<div class="sidebar" *ngIf="router.url == '/home' || router.url == '/friends' || router.url == '/tools' || router.url == '/weeklyhashtag'">
+<div class="sidebar" *ngIf="router.url == '/home' || router.url == '/friends' || router.url == '/tools' || router.url == '/weeklyhashtag' || router.url == '/profile/posts'">
   <div class="sidebar-profile" *ngIf="user">
     <div class="profile-wrap">
       <div class="profile-pic-wrap">
@@ -7,7 +7,7 @@
       <div class="profile-name-wrapper">
         <a routerLink="/profile">
           <h4>{{user.name}}</h4>
-          <h6>Diepe Slaper</h6>
+          <h6 *ngIf="sleepType">{{sleepType}}</h6>
         </a>
       </div>
     </div>
@@ -20,7 +20,7 @@
   </ul>
 </div>
 
-<div *ngIf="router.url == '/home' || router.url == '/friends' || router.url == '/tools' || router.url == '/weeklyhashtag'" class="nav-wrapper" [class.friends-menu]="router.url=='/friends'">
+<div *ngIf="router.url == '/home' || router.url == '/friends' || router.url == '/tools' || router.url == '/weeklyhashtag' || router.url == '/profile/posts'" class="nav-wrapper" [class.friends-menu]="router.url=='/friends'">
   <a id="hamburger-icon" title="Menu" (click)="ToggleSidebar()">
     <span class="line line-1"></span>
     <span class="line line-2"></span>

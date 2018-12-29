@@ -13,6 +13,13 @@ const httpOptions = {
    })
 };
 
+const httpHeader = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  })
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -45,12 +52,6 @@ export class AuthService {
   }
 
   getAllUsers(): Observable<User[]> {
-    const httpHeader = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
 
     return this.http.get<User[]>(`${this.tokenUrl}${environment.api.jsonendpoint}${environment.api.endPoints.Users.url}`, httpHeader);
   }
@@ -71,12 +72,7 @@ export class AuthService {
   }
 
   getActiveUser(): Observable<User> {
-    const httpHeader = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
+
     return this.http.get<User>(`${this.tokenUrl}${environment.api.jsonendpoint}${environment.api.endPoints.Users.url}/me`, httpHeader)
           .pipe(
             tap(_ => this.log(`gotUser`)),
@@ -85,11 +81,7 @@ export class AuthService {
   }
 
   getUserById(id: number): Observable<User> {
-    const httpHeader = {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
+
     return this.http.get<User>(`${this.tokenUrl}${environment.api.jsonendpoint}${environment.api.endPoints.Users.url}/${id}`, httpHeader)
           .pipe(
             tap(_ => this.log(`gotUser with Id: ${id}`)),
@@ -98,12 +90,7 @@ export class AuthService {
   }
 
   updateUserPicture(id: number, avatar): Observable<User> {
-    const httpHeader = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
+
     const httpBody = {
       'meta': {
         'avatar': `${avatar}`
@@ -117,12 +104,7 @@ export class AuthService {
           );
   }
   updateSlaapdoel(id: number, slaapdoel: number): Observable<User> {
-    const httpHeader = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
+
     const httpBody = {
       'meta': {
         'slaapdoel': slaapdoel
@@ -137,12 +119,7 @@ export class AuthService {
   }
 
   updateLocation(id: number, lat: number, long: number): Observable<User> {
-    const httpHeader = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
+
     const httpBody = {
       'fields': {
         'location': {
@@ -160,12 +137,7 @@ export class AuthService {
   }
 
   updateFriends(id: number, friendList: any): Observable<User> {
-    const httpHeader = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      })
-    };
+
     const httpBody = {
       'fields': {
         'friends': friendList
@@ -173,13 +145,14 @@ export class AuthService {
     };
     return this.http.post<User>(`${this.tokenUrl}${environment.api.endPoints.acf.url}${environment.api.endPoints.Users.url}/${id}`, httpBody, httpHeader)
   }
+
    /* GET Users whose name contains search term */
    searchUsers(term: string): Observable<User[]> {
     if (!term.trim()) {
       // if not search term, return empty hero array.
       return of([]);
     }
-    return this.http.get<User[]>(`${this.tokenUrl}${environment.api.jsonendpoint}${environment.api.endPoints.Users.url}/?search=${term}`).pipe(
+    return this.http.get<User[]>(`${this.tokenUrl}${environment.api.jsonendpoint}${environment.api.endPoints.Users.url}/?search=${term}&per_page=10`).pipe(
       tap(_ => this.log(`found Users matching "${term}"`)),
       catchError(this.handleError<User[]>('searchUsers', []))
     );

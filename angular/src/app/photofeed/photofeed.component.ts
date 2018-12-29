@@ -19,7 +19,6 @@ export class PhotofeedComponent implements OnInit {
 
   ngOnInit() {
     this.getCurrentUser();
-    // TODO: make a functionality to sort posts
   }
 
   updateLike(likeList, postId): void {
@@ -64,23 +63,12 @@ export class PhotofeedComponent implements OnInit {
         });
   }
   getPosts(): void {
-    // TODO: ORDER BY last created
-    const postArray = [];
-    let counter = 0;
-    this.userFriends.forEach(friend => {
-      counter++;
-      this.photofeedService.filterPostByAuthor(friend)
-      .subscribe(post => {
-        post.forEach(friendPost => {
-          postArray.push(friendPost);
-        });
-      });
-
-      if (this.userFriends.length === counter) {
-        this.posts = postArray;
-        this.checkLikes();
-      }
-    });
+    console.log();
+    this.photofeedService.filterPostByAuthor(this.userFriends.toString())
+        .subscribe(postData => {
+          this.posts = postData;
+          this.checkLikes();
+        })
   }
   checkLikes(): void {
     const postArray = this.posts;

@@ -100,4 +100,40 @@ class Sleeptracking_Public {
 
 	}
 
+	function backend_register_sleeptracking() {
+		$labels = array(
+			'name' => __('Sleep Tracking', 'backend'),
+			'singular_name' => __('Sleep tracking', 'backend'),
+			'add_new' => __('Add New Sleep Tracking', 'backend'),
+			'all_items' => __('All Sleep Trackings', 'backend'),
+			'add_new_items' => __('Add New Sleep Tracking', 'backend'),
+			'edit_item' => __('Edit Sleep Tracking', 'backend'),
+			'new_item' => __('New Sleep Tracking', 'backend'),
+			'view_item' => __('View Sleep Tracking', 'backend'),
+			'search_item' => __('Search Sleep Tracking', 'backend'),
+			'not_found' => __('Sleep Tracking not found', 'backend'),
+			'not_found_in_trash' => __('Sleep Tracking not found in the trash', 'backend'),
+			'parent_item_colon' => __('Parent Sleep Tracking', 'backend'),
+		);
+		$args = array(
+			'labels' => $labels,
+			'public' => true,
+			'has_archive' => true,
+			'publicly_queryable' => true,
+			'query_var' => true,
+			'rewrite' => array('slug' => 'sleeptracking'),
+			'capability_type' => 'post',
+			'hierarchical' => false,
+			'supports' => array(
+				'author'
+			),
+			'menu_position' => 6,
+			'exclude_from_search' => false,
+			'menu_icon' => 'dashicons-backup',
+			'show_in_rest' => true,
+			'rest_base' => 'sleeptracking'
+		);		
+		register_post_type('sleeptracking', $args);
+	}
+
 }

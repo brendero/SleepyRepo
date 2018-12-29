@@ -17,16 +17,24 @@ export class PhotofeedAddComponent implements OnInit {
   imageAttachment: File;
   previewImg: any;
   fileName: string;
+  hashtag: number;
+  tags: any;
   constructor(
-    private fileReaderService: FileReaderService,
     private mediaService: MediaService,
     private photofeedService: PhotofeedService,
     private location: Location
   ) { }
 
   ngOnInit() {
+    this.getHashes();
   }
-
+  getHashes(): void {
+    this.photofeedService.getHashTags()
+        .subscribe(hash => {
+          console.log(hash);
+          this.tags = hash;
+        });
+  }
   postSubmit(): void {
     // first make a featured image using the picture value
     const formData = new FormData();
@@ -39,9 +47,7 @@ export class PhotofeedAddComponent implements OnInit {
     }
     makeNewPost(): void {
     // then link the featured image to the new post via ID
-    this.newPost = new Post();
-    this.newPost.content = this.description;
-    this.newPost.featured_media = this.featuredImage;
+    this.newPost = new Post(this.description, this.featuredImage, this.hashtag);
     this.newPost.status = 'publish';
     // setup new post then post to API
     this.photofeedService.createPost(this.newPost)
@@ -53,12 +59,15 @@ export class PhotofeedAddComponent implements OnInit {
     this.setThis($event.target);
   }
   setThis(inputValue: any): void {
+    // get the file inputvalue
     const file: File = inputValue.files[0];
+    // create a new instance of the FileReader
     const reader = new FileReader();
-
+    // check to see if it had the right file extension
     if (file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/gif') {
+      // set the file as a global variable
       this.imageAttachment = file;
-      console.log(this.imageAttachment);
+      // set the filename to display it in the frontend
       this.fileName = this.imageAttachment.name;
       reader.onload = e => this.previewImg = reader.result;
 

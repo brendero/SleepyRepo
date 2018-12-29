@@ -9,6 +9,12 @@
       <h4>zet de beschrijving van je post</h4>
       <textarea maxlength="60" name="description" [(ngModel)]="description"></textarea>
     </div>
+    <div class="hash-select">
+      <i class="fa fa-hashtag"></i>
+      <select [(ngModel)]="hashtag" name="hashtag">
+        <option *ngFor="let tag of tags" value="{{tag.id}}">{{tag.name}}</option>
+      </select>
+    </div>
     <div>
       <div class="upload-btn-wrapper">
         <button class="btn"><i class="fa fa-paperclip"></i></button>

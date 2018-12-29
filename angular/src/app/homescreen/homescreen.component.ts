@@ -1,6 +1,7 @@
 import { SleeptrackingService } from './../sleeptrackingService/sleeptracking.service';
 import { Sleeptrack } from './../Sleeptrack';
 import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-homescreen',
@@ -10,7 +11,6 @@ import { Component, OnInit } from '@angular/core';
 export class HomescreenComponent implements OnInit {
   sleeptracking: Sleeptrack;
   startDate: string;
-  endDate: string;
   sleepHour: string;
   wakeHour: string;
   constructor(
@@ -22,12 +22,16 @@ export class HomescreenComponent implements OnInit {
   }
 
   submitSleep(): void {
-    // TODO: make a date only be posted once
-    this.sleeptracking = new Sleeptrack();
-    this.sleeptracking.sleep_date = this.startDate;
-    this.sleeptracking.end_date = this.endDate;
-    this.sleeptracking.sleep_hour = this.sleepHour;
-    this.sleeptracking.wake_hour = this.wakeHour;
+    let endDate;
+    if (this.wakeHour < this.sleepHour) {
+      const sdate = new Date(this.startDate);
+      sdate.setDate(sdate.getDate() + 1);
+      endDate = `${sdate.getFullYear()}-${sdate.getMonth() + 1}-${sdate.getDate()}`;
+    } else {
+      endDate = this.startDate;
+    }
+
+    this.sleeptracking = new Sleeptrack(this.startDate, endDate, this.sleepHour, this.wakeHour);
 
     this.sleeptrackingService.createSleepTracking(this.sleeptracking)
         .subscribe(data => {

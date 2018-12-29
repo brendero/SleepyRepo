@@ -119,6 +119,7 @@ class Weeklyhashtag_Public {
 		$args = array(
 			'labels' => $labels,
 			'public' => true,
+			'exclude_from_search' => false,
 			'has_archive' => true,
 			'publicly_queryable' => true,
 			'query_var' => true,
@@ -130,6 +131,9 @@ class Weeklyhashtag_Public {
 				'thumbnail',
 				'comments',
 				'author'
+			),
+			'taxonomies' => array(
+				'category'
 			),
 			'menu_position' => 5,
 			'exclude_from_search' => false,

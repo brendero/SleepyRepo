@@ -6,8 +6,7 @@
           <img src="{{user.meta.avatar}}">
         </div>
         <h4>{{user.name}}</h4>
-        <!-- TODO: make type of sleeper dynamic -->
-        <h6>Diepe Slaper</h6>
+        <h6 *ngIf="sleepType">{{sleepType}}</h6>
       </div>
     </div>
     <div class="menu-container">

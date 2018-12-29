@@ -29,6 +29,7 @@ export class Meta {
 export class Acf {
   friends?: any;
   location?: Location;
+  sleeptype?: number;
 }
 
 export class Location {

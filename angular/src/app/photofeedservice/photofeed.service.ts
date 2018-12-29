@@ -32,8 +32,8 @@ export class PhotofeedService {
   getPost(id: number): Observable<Post> {
     return this.http.get<Post>(`${this.postUrl}/${id}?_embed`, httpOptions);
   }
-  filterPostByAuthor(id: number): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.postUrl}?_embed&?filter[meta_key]=author&filter[meta_value]=${id}`, httpOptions);
+  filterPostByAuthor(id: string): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.postUrl}?author=${id}&filter[orderby]=date&order=asc&_embed`, httpOptions);
   }
   updateLikes(id: number, likeList): Observable<Post> {
     const httpBody = {
@@ -54,6 +54,20 @@ export class PhotofeedService {
           .pipe(
             tap(_ => this.log(`postCreated`)),
             catchError(this.handleError<Post>('createPost'))
+          );
+  }
+
+  deletePost(id: number): Observable<Post> {
+    return this.http.delete<Post>(`${this.postUrl}/${id}`, httpOptions)
+          .pipe(
+            tap(_ => this.log(`PostDeleted`)),
+          );
+  }
+
+  getHashTags(): Observable<any> {
+    return this.http.get<any>(`${environment.api.url}${environment.api.jsonurl}${environment.api.jsonendpoint}${environment.api.endPoints.categories.url}`, httpOptions)
+          .pipe(
+            tap(_ => this.log(`categories`))
           );
   }
 

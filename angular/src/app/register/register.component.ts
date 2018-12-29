@@ -11,6 +11,7 @@ import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms'
 })
 export class RegisterComponent implements OnInit {
   user: User;
+  newUser: User;
   firstName: string;
   lastName: string;
   username: string;
@@ -18,7 +19,7 @@ export class RegisterComponent implements OnInit {
   password: string;
   registerForm: FormGroup;
   httpErrorMessage: string;
-  submitted: false;
+  submitted: boolean;
 
   constructor(
     private authService: AuthService,
@@ -43,9 +44,18 @@ export class RegisterComponent implements OnInit {
       this.user = new User(username, firstName, lastName, password, email, default_avatar);
       console.log(this.user);
       this.authService.createUser(this.user)
-            .subscribe(() => this.router.navigateByUrl('/'), err => this.httpErrorMessage = err.error.message );
+            .subscribe((newUser) => {
+              this.loginUser();
+            }, err => this.httpErrorMessage = err.error.message );
     } else {
       this.submitted = true;
     }
+  }
+  loginUser(): void {
+    this.authService.userLogin(this.user.username, this.user.password)
+        .subscribe(tokenData => {
+          localStorage.setItem('token', tokenData.token);
+          this.router.navigateByUrl(`/profile/quiz/`);
+        });
   }
 }

@@ -24,6 +24,8 @@ h4
     width: 100%
     height: 100px
     border-radius: 6px
+    &:focus
+      outline: none
 .add-post-btn
   background: $white
   border: 1px solid black
@@ -61,3 +63,23 @@ h4
   left: 0
   top: 0
   opacity: 0
+
+.hash-select
+  display: flex
+  border: 1px solid rgba(112, 112, 112, 0.35)
+  box-shadow: 1px 6px 6px rgba(0, 0, 0, 0.16)
+  box-sizing: border-box
+  border-radius: 5px
+  margin-bottom: 20px
+  margin-top: 10px
+  select
+    width: 85%
+    border: none
+    padding: 10px
+    &:focus
+      outline: none
+  i
+    width: 15%
+    padding: 10px
+    text-align: center
+    background: $accent

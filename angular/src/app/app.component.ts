@@ -1,6 +1,7 @@
+import { QuizService } from './quizservice/quiz.service';
 import { AuthService } from './authservice/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 import { User } from './User';
 
 @Component({
@@ -10,14 +11,25 @@ import { User } from './User';
 })
 export class AppComponent implements OnInit {
   user: User;
+  sleepType: string;
 
   constructor(
     public router: Router,
-    private authService: AuthService) {}
+    private authService: AuthService,
+    private quizService: QuizService
+    ) {}
   title = 'Sleepy';
 
   ngOnInit() {
-    this.getActiveUser();
+    this.router.events.forEach(event => {
+      if (event instanceof NavigationStart) {
+        if (event['url'] !== '/login' && event['url'] !== '/register') {
+          this.getActiveUser();
+        } else {
+          console.log('dont do nuffing');
+        }
+      }
+    });
   }
 
   ToggleSidebar() {
@@ -39,7 +51,10 @@ export class AppComponent implements OnInit {
     this.authService.getActiveUser()
         .subscribe(userData => {
           this.user = userData;
+          this.getSleepType();
         });
   }
+  getSleepType(): void {
+    this.sleepType = this.quizService.returnTypeQuiz(this.user.acf.sleeptype);
+  }
 }
-
