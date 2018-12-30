@@ -35,7 +35,6 @@ export class HomescreenComponent implements OnInit {
 
     this.sleeptrackingService.createSleepTracking(this.sleeptracking)
         .subscribe(data => {
-          console.log(data);
         });
   }
 }

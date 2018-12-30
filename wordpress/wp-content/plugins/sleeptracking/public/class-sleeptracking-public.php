@@ -136,4 +136,48 @@ class Sleeptracking_Public {
 		register_post_type('sleeptracking', $args);
 	}
 
+	function meta_query() {
+		register_rest_route('wp/v2', '/sleeptracking/datequery', array(
+			'methods' => 'GET',
+			'callback' => array($this, 'custom_date_query')
+		));
+	}
+
+	function custom_date_query() {
+		if (isset($_GET['startdate']) && isset($_GET['enddate'])) {
+			$startDate = $_GET['startdate'];
+			$endDate = $_GET['enddate'];
+			$args = array(
+				'post_type' => 'sleeptracking',
+				'relation' => 'AND',
+				'meta_query' => array(
+					array(
+						'key' => 'sleep_date',
+						'value' => array($startDate, $endDate),
+						'compare' => 'BETWEEN',
+						'type' => 'DATE'
+					),
+				),
+			);
+			$meta_query = new WP_query($args);
+			if($meta_query->have_posts()) {
+				$data = array();
+				$meta_keys = array('sleep_date','end_date', 'sleep_hour', 'wake_hour');
+				
+				while($meta_query->have_posts()) {
+					$meta_query->the_post();
+					$post = get_post();
+					foreach($meta_keys as $meta) {
+						$post->$meta = get_post_meta(get_post()->ID, $meta);
+					}
+					$data[] = $post;
+				}
+				return $data;
+			}
+			else {
+				return 'no posts';
+			}
+		}
+	}
+
 }

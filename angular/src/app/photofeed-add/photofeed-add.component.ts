@@ -31,7 +31,6 @@ export class PhotofeedAddComponent implements OnInit {
   getHashes(): void {
     this.photofeedService.getHashTags()
         .subscribe(hash => {
-          console.log(hash);
           this.tags = hash;
         });
   }

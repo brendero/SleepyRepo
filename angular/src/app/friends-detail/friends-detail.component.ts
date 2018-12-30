@@ -63,7 +63,6 @@ export class FriendsDetailComponent implements OnInit {
       friendSymbol.classList.add('fa-check');
       btnText.textContent = 'Friends';
     } else {
-      console.log('not friends');
       addFriendBtn.classList.remove('btn-active');
       friendSymbol.classList.add('fa-plus');
       friendSymbol.classList.remove('fa-check');

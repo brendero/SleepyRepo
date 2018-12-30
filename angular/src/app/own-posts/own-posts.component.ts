@@ -22,7 +22,6 @@ export class OwnPostsComponent implements OnInit {
   getActiveUser(): void {
     this.authService.getActiveUser()
       .subscribe(userData => {
-        console.log(userData);
         this.userId = userData.id;
         this.getOwnPosts();
       });
@@ -30,7 +29,6 @@ export class OwnPostsComponent implements OnInit {
   getOwnPosts(): void {
     this.photofeedService.filterPostByAuthor(this.userId.toString())
         .subscribe(postData => {
-          console.log(postData);
           this.posts = postData;
           this.checkLikes();
         });

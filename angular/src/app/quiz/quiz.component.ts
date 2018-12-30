@@ -29,7 +29,6 @@ export class QuizComponent implements OnInit {
   getActiveUser(): void {
     this.authService.getActiveUser()
         .subscribe(userData => {
-          console.log(userData);
           this.userId = userData.id;
         });
   }

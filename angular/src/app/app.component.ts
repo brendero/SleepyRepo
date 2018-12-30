@@ -25,8 +25,6 @@ export class AppComponent implements OnInit {
       if (event instanceof NavigationStart) {
         if (event['url'] !== '/login' && event['url'] !== '/register') {
           this.getActiveUser();
-        } else {
-          console.log('dont do nuffing');
         }
       }
     });

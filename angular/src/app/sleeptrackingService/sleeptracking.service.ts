@@ -43,6 +43,12 @@ export class SleeptrackingService {
             );
   }
 
+  getAllSleepTracking(): Observable<Sleeptrack> {
+    return this.http.get<Sleeptrack>(`${this.sleeptrackURl}`, httpHeader)
+        .pipe(
+          tap(_ => this.log('getAllSleepTracking'))
+        );
+  }
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 

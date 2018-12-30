@@ -42,7 +42,6 @@ export class RegisterComponent implements OnInit {
       const default_avatar = 'https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-512.png';
       const { username, firstName, lastName, email, password } = this.registerForm.value;
       this.user = new User(username, firstName, lastName, password, email, default_avatar);
-      console.log(this.user);
       this.authService.createUser(this.user)
             .subscribe((newUser) => {
               this.loginUser();

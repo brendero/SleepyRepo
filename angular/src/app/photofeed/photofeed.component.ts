@@ -63,7 +63,6 @@ export class PhotofeedComponent implements OnInit {
         });
   }
   getPosts(): void {
-    console.log();
     this.photofeedService.filterPostByAuthor(this.userFriends.toString())
         .subscribe(postData => {
           this.posts = postData;

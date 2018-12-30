@@ -2,6 +2,7 @@ import { TrustHtmlPipe, SplitPipe } from './pipeService/pipe.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,6 +47,7 @@ import { OwnPostsComponent } from './own-posts/own-posts.component';
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
+    GoogleChartsModule.forRoot(),
     HttpClientModule
   ],
   providers: [],
