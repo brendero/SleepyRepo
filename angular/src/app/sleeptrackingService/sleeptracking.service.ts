@@ -43,11 +43,17 @@ export class SleeptrackingService {
             );
   }
 
-  getAllSleepTracking(): Observable<Sleeptrack> {
-    return this.http.get<Sleeptrack>(`${this.sleeptrackURl}`, httpHeader)
+  getAllSleepTracking(): Observable<Sleeptrack[]> {
+    return this.http.get<Sleeptrack[]>(`${this.sleeptrackURl}`, httpHeader)
         .pipe(
           tap(_ => this.log('getAllSleepTracking'))
         );
+  }
+  getSleepTrackingBetweenDates(startDate: string, endDate: string): Observable<Sleeptrack[]> {
+    return this.http.get<Sleeptrack[]>(`${this.sleeptrackURl}/datequery?startdate=${startDate}&enddate=${endDate}`)
+            .pipe(
+              tap(_ => this.log(`getSleeptracking`))
+            );
   }
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

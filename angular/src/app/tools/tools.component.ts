@@ -22,6 +22,7 @@ export class ToolsComponent implements OnInit {
     this.toolsService.getTools()
         .subscribe(toolsData => {
           this.tools = toolsData;
+          console.log(toolsData);
         });
   }
 

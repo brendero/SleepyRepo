@@ -56,7 +56,6 @@ export class FriendsComponent implements OnInit {
               attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(this.map);
             const userIcon = L.icon({
-              // TODO: set icon as current user profile picture
               iconUrl: '../../assets/img/Logo.svg',
               iconSize: [38, 95],
               iconAnchor: [22, 94],
@@ -77,7 +76,6 @@ export class FriendsComponent implements OnInit {
       this.authService.getUserById(friend)
           .subscribe(friendData => {
             const customPopup = `<a href='/friends/${friendData.id}' style="display:flex; align-items:center;"><img src='${friendData.meta.avatar}' style='width:54px; height: 54px;border-radius: 100%; padding: 5px;'/>${friendData.name}</a>`;
-            // TODO: make custom marker icon that uses friends avatar
             L.marker([friendData.acf.location.lat, friendData.acf.location.lng]).addTo(this.map).bindPopup(customPopup);
           });
     });

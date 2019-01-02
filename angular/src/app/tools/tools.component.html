@@ -2,5 +2,6 @@
   <div *ngFor="let tool of tools" class="tools-wrapper">
     <h1>{{tool.title.rendered}}</h1>
     <img src="{{tool._embedded['wp:featuredmedia']['0'].source_url}}">
+    <span class="tool-content" [innerHTML]="tool.content.rendered | trustHtml"></span>
   </div>
 </div>

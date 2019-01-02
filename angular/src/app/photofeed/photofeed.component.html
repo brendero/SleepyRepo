@@ -12,6 +12,7 @@
       <img src="{{post._embedded['wp:featuredmedia']['0'].source_url}}">
       <div class="post-description">
         <span [innerHTML]="post.content.rendered | trustHtml"></span>
+        <span class="post-hashtag" *ngIf="post._embedded['wp:term']">#{{post._embedded['wp:term']['0']['0'].name}}</span>
       </div>
       <div class="meta-box">
         <div>

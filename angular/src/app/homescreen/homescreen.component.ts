@@ -1,7 +1,8 @@
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { SleeptrackingService } from './../sleeptrackingService/sleeptracking.service';
 import { Sleeptrack } from './../Sleeptrack';
 import { Component, OnInit } from '@angular/core';
-import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-homescreen',
@@ -14,7 +15,8 @@ export class HomescreenComponent implements OnInit {
   sleepHour: string;
   wakeHour: string;
   constructor(
-    private sleeptrackingService: SleeptrackingService
+    private sleeptrackingService: SleeptrackingService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -34,7 +36,8 @@ export class HomescreenComponent implements OnInit {
     this.sleeptracking = new Sleeptrack(this.startDate, endDate, this.sleepHour, this.wakeHour);
 
     this.sleeptrackingService.createSleepTracking(this.sleeptracking)
-        .subscribe(data => {
+        .subscribe(() => {
+          window.location.reload();
         });
   }
 }
