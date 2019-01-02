@@ -74,10 +74,8 @@ export class PhotofeedComponent implements OnInit {
     const ID = this.activeUserID;
     setTimeout(function() {
       postArray.forEach(element => {
-        console.log(element);
         const heart = document.querySelector(`#heart${element.id}`);
         if (element.acf.likes.indexOf(ID) > -1) {
-          console.log(heart);
           heart.classList.remove('far');
           heart.classList.add('fa');
           heart.classList.add('heartColor');

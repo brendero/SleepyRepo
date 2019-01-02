@@ -61,7 +61,7 @@ export class FriendsComponent implements OnInit {
               iconAnchor: [22, 94],
               popupAnchor: [-3, -76],
             });
-            L.marker([position.coords.latitude, position.coords.longitude]).addTo(this.map).bindPopup('this is the user');
+            L.marker([position.coords.latitude, position.coords.longitude]).addTo(this.map).bindPopup('this is you');
           },
           function(err) {
             console.log(err);
