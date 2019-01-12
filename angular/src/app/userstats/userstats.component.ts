@@ -37,9 +37,9 @@ export class UserstatsComponent implements OnInit {
 
     const startDate = `${lastWeek.getFullYear()}-${lastWeek.getMonth() + 1}-${lastWeek.getDate()}`;
     const endDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-
     this.sleeptrackingService.getSleepTrackingBetweenDates(startDate, endDate)
     .subscribe(sleeptrack => {
+      console.log(sleeptrack);
       const dateArray = new Map();
       sleeptrack.forEach(element => {
           const value =  dateArray.get(element.sleep_date[0]);
@@ -49,7 +49,6 @@ export class UserstatsComponent implements OnInit {
           } else {
             value.push((24 - parseInt(element.sleep_hour[0])));
           }
-
           const endValue = dateArray.get(element.end_date[0]);
           if (!endValue) {
             dateArray.set(element.end_date[0], [parseInt(element.wake_hour[0])] );
@@ -62,6 +61,7 @@ export class UserstatsComponent implements OnInit {
 
         sdate.setDate(lastWeek.getDate() + i);
         const currentDateFormat = `${sdate.getFullYear()}-${sdate.getMonth() + 1}-${sdate.getDate()}`;
+        console.log(currentDateFormat);
         const sleepingData = dateArray.get(currentDateFormat);
         let totalHours = 0;
         if (sleepingData !== undefined) {

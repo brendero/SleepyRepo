@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
     this.authService.userLogin(this.user.username, this.user.password)
         .subscribe(tokenData => {
           localStorage.setItem('token', tokenData.token);
-          this.router.navigateByUrl(`/profile/quiz/`);
+          this.router.navigateByUrl(`/profile/quiz`);
         });
   }
 }
